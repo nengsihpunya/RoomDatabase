@@ -1,9 +1,12 @@
 package com.example.roomdatabase.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +29,9 @@ public class DetailActivity extends AppCompatActivity {
     RecyclerView myRecyclerview;
     FloatingActionButton myFab;
     RecycleAdapter recycleAdapter;
-    List<Mahasiswa> listMahasiswas = new ArrayList<>();
+    List<Mahasiswa> listMahasiswas = new ArrayList<Mahasiswa>();
+    Button editButton;
+    Button delButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         fetchDataFromRoom();
-        initRecyclerView();
+        initRecyclerView();add
         setAdapter();
     }
 
@@ -75,5 +80,42 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setAdapter() {
         myRecyclerview.setAdapter(recycleAdapter);
+
+        @Override
+                public boolean onItemLongClick(final AdapterView<Mahasiswa> adapter, Vi
+        final long id) {
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dialog_view);
+            dialog.setTitle("Pilih aksi");
+            dialog.show();
+            final Mahasiswa m = (Mahasiswa) getListAdapter().getItem(pos);
+            editButton = (Button) dialog.findViewById(R.id.btn_edit);
+            delButton = (Button) dialog.findViewById(R.id.btn_del);
+
+            editButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            switchToEdit(m.getId());
+                            dialog.dismiss();
+                        }
+                    }
+            );
+            delButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dataSource.deleteMahasiswa(m.getId());
+                            dialog.dismiss();
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    }
+            );
+            return true;
+        }
+        public void switchToEdit(long id)
+
+        Mahasiswa m = datasource.getMahasiswa(id);
     }
 }

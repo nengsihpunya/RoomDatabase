@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -21,5 +21,24 @@
         android:src="@drawable/ic_add"
         android:tint="@android:color/white"
         app:fabSize="normal"/>
+
+    <Button
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="250dp">
+
+    </Button>
+    <Button
+        android:id="@+id/btn_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="200dp">
+
+    </Button>
 
 </RelativeLayout>
